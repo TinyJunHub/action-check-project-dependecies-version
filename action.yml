@@ -16,9 +16,9 @@ runs:
     - name: check maven project dependencies version
       if: inputs.project-type == 'maven'
       shell: bash
-      run: bin/check-maven-dependencies-version.sh
+      run: bin/check-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
 
     - name: check gradle project dependencies version
       if: inputs.project-type == 'gradle'
       shell: bash
-      run: bin/check-gradle-dependencies-version.sh
+      run: bin/check-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
