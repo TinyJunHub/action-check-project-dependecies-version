@@ -8,17 +8,22 @@ inputs:
   project-type:
     description: project build type like maven, gradle.
     required: false
-    default: maven
+    default: service-maven
 
 runs:
   using: "composite"
   steps:
     - name: check maven project dependencies version
-      if: inputs.project-type == 'maven'
+      if: inputs.project-type == 'service-maven'
       shell: bash
-      run: check-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: sh check-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
 
-    - name: check gradle project dependencies version
-      if: inputs.project-type == 'gradle'
+    - name: check service gradle project dependencies version
+      if: inputs.project-type == 'service-gradle'
       shell: bash
-      run: check-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: sh check-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
+
+    - name: check android gradle project dependencies version
+      if: inputs.project-type == 'android-gradle'
+      shell: bash
+      run: sh bin/check-android-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
