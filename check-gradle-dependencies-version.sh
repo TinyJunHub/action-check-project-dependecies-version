@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 SUFFIX_REGEX=$1
 
 if [ "$SUFFIX_REGEX" == "" ]; then
