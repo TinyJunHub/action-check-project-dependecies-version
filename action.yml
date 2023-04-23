@@ -1,0 +1,24 @@
+name: "Check project's dependencies version involves SNAPSHOT"
+description: "Check project's dependencies version involves SNAPSHOT"
+inputs:
+  suffix-regex:
+    description: The suffix regex rule of filtering the project's dependencies version
+    required: false
+    default: "SNAPSHOT"
+  project-type:
+    description: project build type like maven, gradle.
+    required: false
+    default: maven
+
+runs:
+  using: "composite"
+  steps:
+    - name: check maven project dependencies version
+      if: inputs.project-type == 'maven'
+      shell: bash
+      run: bin/check-maven-dependencies-version.sh
+
+    - name: check gradle project dependencies version
+      if: inputs.project-type == 'gradle'
+      shell: bash
+      run: bin/check-gradle-dependencies-version.sh
