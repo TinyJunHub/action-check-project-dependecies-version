@@ -2,7 +2,8 @@
 
 SUFFIX_REGEX=$1
 
-if [ "$SUFFIX_REGEX" == "" ]; then
+if [ "$SUFFIX_REGEX" == "" ]
+then
     echo "** Please input Suffix Regex ***"
     exit 1
 fi
@@ -17,4 +18,10 @@ then
   echo $(./gradlew dependencies --configuration api | awk '/'"$SUFFIX_REGEX"'/')
   echo $(./gradlew dependencies --configuration implementation | awk '/'"$SUFFIX_REGEX"'/')
   exit 1
+elif [ "$SNAPSHOT_DEPENDENCIES_COUNT" != "0" ]
+then
+  echo "SNAPSHOT_DEPENDENCIES_COUNT: $SNAPSHOT_DEPENDENCIES_COUNT"
+  exit 1
+else
+  echo "SNAPSHOT_DEPENDENCIES_COUNT: $SNAPSHOT_DEPENDENCIES_COUNT"
 fi

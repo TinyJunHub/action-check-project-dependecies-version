@@ -16,12 +16,12 @@ runs:
     - name: check maven project dependencies version
       if: inputs.project-type == 'service-maven'
       shell: bash
-      run: sh check-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: sh bin/check-service-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
 
     - name: check service gradle project dependencies version
       if: inputs.project-type == 'service-gradle'
       shell: bash
-      run: sh check-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: sh bin/check-service-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
 
     - name: check android gradle project dependencies version
       if: inputs.project-type == 'android-gradle'
