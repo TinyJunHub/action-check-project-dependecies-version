@@ -1,14 +1,18 @@
 name: "Check project's dependencies version involves SNAPSHOT"
 description: "Check project's dependencies version involves SNAPSHOT"
 inputs:
+  file-path:
+    description: The specific file location
+    required: false
+    default: './'
   suffix-regex:
     description: The suffix regex rule of filtering the project's dependencies version
     required: false
-    default: "SNAPSHOT"
+    default: 'SNAPSHOT'
   project-type:
     description: project build type like maven, gradle.
     required: false
-    default: service-maven
+    default: 'service-maven'
 
 runs:
   using: "composite"
@@ -16,14 +20,20 @@ runs:
     - name: check maven project dependencies version
       if: inputs.project-type == 'service-maven'
       shell: bash
-      run: sh bin/check-service-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: |
+        cd ${{ inputs.file-path }}
+        sh bin/check-service-maven-dependencies-version.sh ${{ inputs.suffix-regex }}
 
     - name: check service gradle project dependencies version
       if: inputs.project-type == 'service-gradle'
       shell: bash
-      run: sh bin/check-service-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: |
+        cd ${{ inputs.file-path }}
+        sh bin/check-service-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
 
     - name: check android gradle project dependencies version
       if: inputs.project-type == 'android-gradle'
       shell: bash
-      run: sh bin/check-android-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
+      run: |
+        cd ${{ inputs.file-path }}
+        sh bin/check-android-gradle-dependencies-version.sh ${{ inputs.suffix-regex }}
