@@ -3,7 +3,7 @@
 SUFFIX_REGEX=$1
 FILE_PATH=$2
 
-if [[ "$SUFFIX_REGEX" == "" ]]
+if [ "$SUFFIX_REGEX" = "" ]
 then
     echo "** Please input Suffix Regex ***"
     exit 1
