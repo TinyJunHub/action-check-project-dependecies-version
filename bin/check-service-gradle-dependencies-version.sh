@@ -9,7 +9,7 @@ then
     exit 1
 fi
 
-BUILD_SUCCESSFUL_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH :app:dependencies --configuration api | awk '/BUILD SUCCESSFUL/' | wc -l)
+BUILD_SUCCESSFUL_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api | awk '/BUILD SUCCESSFUL/' | wc -l)
 
 API_SNAPSHOT_DEPENDENCIES_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api | awk '/'"$SUFFIX_REGEX"'/' | wc -l)
 IMPLEMENTATION_SNAPSHOT_DEPENDENCIES_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration implementation | awk '/'"$SUFFIX_REGEX"'/' | wc -l)
