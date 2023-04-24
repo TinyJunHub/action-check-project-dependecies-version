@@ -1,9 +1,9 @@
-# action-check-project-dependecies-version V1.2.6
+# action-check-project-dependencies-version V1.2.6
 This action checks your project's snapshot dependencies.
 
 # Usage
 ```yaml
-- uses: TinyJunHub/action-check-project-dependecies-version@v1.2.6
+- uses: TinyJunHub/action-check-project-dependencies-version@v1.2.6
   with:
     # Project folder path. For example, ./pom.xml
     # Default: './'
@@ -18,20 +18,20 @@ This action checks your project's snapshot dependencies.
 ```
 
 # Scenarios
-+ [Check service project with maven](https://github.com/TinyJunHub/action-check-project-dependecies-version#Check-service-project-with-maven)
-+ [Check service project with gradle](https://github.com/TinyJunHub/action-check-project-dependecies-version#Check-service-project-with-gradle)
-+ [Check android project with gradle](https://github.com/TinyJunHub/action-check-project-dependecies-version#Check-service-project-with-gradle)
++ [Check service project with maven](https://github.com/TinyJunHub/action-check-project-dependencies-version#Check-service-project-with-maven)
++ [Check service project with gradle](https://github.com/TinyJunHub/action-check-project-dependencies-version#Check-service-project-with-gradle)
++ [Check android project with gradle](https://github.com/TinyJunHub/action-check-project-dependencies-version#Check-service-project-with-gradle)
 
 ## Check project repository with maven
 ```yaml
   - name: check snapshot dependencies
-    uses: TinyJunHub/action-check-project-dependecies-version@v1
+    uses: TinyJunHub/action-check-project-dependencies-version@v1
 ```
 
 ## Check service project with gradle
 ```yaml
   - name: check snapshot dependencies
-    uses: TinyJunHub/action-check-project-dependecies-version@v1
+    uses: TinyJunHub/action-check-project-dependencies-version@v1
     with:
       project-type: 'service-gradle'
 ```
@@ -39,7 +39,7 @@ This action checks your project's snapshot dependencies.
 ## Check android project with gradle
 ```yaml
   - name: check snapshot dependencies
-    uses: TinyJunHub/action-check-project-dependecies-version@v1
+    uses: TinyJunHub/action-check-project-dependencies-version@v1
     with:
       project-type: 'android-gradle'
 ```
