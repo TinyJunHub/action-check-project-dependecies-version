@@ -9,20 +9,22 @@ then
     exit 1
 fi
 
-BUILD_SUCCESSFUL_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api | awk '/BUILD SUCCESSFUL/' | wc -l)
+API_BUILD_RESULT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api)
+IMPLEMENTATION_BUILD_RESULT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration implementation)
+BUILD_RESULT="$API_BUILD_RESULT \n $IMPLEMENTATION_BUILD_RESULT"
 
-API_SNAPSHOT_DEPENDENCIES_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api | awk '/'"$SUFFIX_REGEX"'/' | wc -l)
-IMPLEMENTATION_SNAPSHOT_DEPENDENCIES_COUNT=$($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration implementation | awk '/'"$SUFFIX_REGEX"'/' | wc -l)
-SNAPSHOT_DEPENDENCIES_COUNT=`expr $API_SNAPSHOT_DEPENDENCIES_COUNT + $IMPLEMENTATION_SNAPSHOT_DEPENDENCIES_COUNT`
+BUILD_SUCCESSFUL_COUNT=$(echo -e "$BUILD_RESULT" | awk '/BUILD SUCCESSFUL/' | wc -l)
+SNAPSHOT_DEPENDENCIES_COUNT=$(echo -e "$BUILD_RESULT" | awk '/'"$SUFFIX_REGEX"'/' | wc -l)
 
 if [ "$SNAPSHOT_DEPENDENCIES_COUNT" -gt "0" ]
 then
   printf "*** %s SNAPSHOT dependencies detected ***\n---\n" "$SNAPSHOT_DEPENDENCIES_COUNT"
-  echo $($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration api | awk '/'"$SUFFIX_REGEX"'/')
-  echo $($FILE_PATH/gradlew -p $FILE_PATH dependencies --configuration implementation | awk '/'"$SUFFIX_REGEX"'/')
+  echo $(echo -e "$BUILD_RESULT" | awk '/'"$SUFFIX_REGEX"'/')
   exit 1
-elif [ "$BUILD_SUCCESSFUL_COUNT" -ne "1" ]
+elif [ "$BUILD_SUCCESSFUL_COUNT" -lt "1" ]
 then
   echo "Build failed, please check input params again. SNAPSHOT_DEPENDENCIES_COUNT: $SNAPSHOT_DEPENDENCIES_COUNT"
   exit 1
+else
+  printf "*** No snapshot dependencies! *** \n"
 fi

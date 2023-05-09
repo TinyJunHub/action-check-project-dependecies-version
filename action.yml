@@ -13,6 +13,10 @@ inputs:
     description: project build type like maven, gradle.
     required: false
     default: 'service-maven'
+  main-subproject-name:
+    description: The name of main subproject which you want to check like `app` in Android
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -30,4 +34,4 @@ runs:
     - name: check android gradle project dependencies version
       if: inputs.project-type == 'android-gradle'
       shell: bash
-      run: sh ${{ github.action_path }}/bin/check-android-gradle-dependencies-version.sh ${{ inputs.suffix-regex }} ${{ inputs.file-path }}
+      run: sh ${{ github.action_path }}/bin/check-android-gradle-dependencies-version.sh ${{ inputs.suffix-regex }} ${{ inputs.suffix-regex }} ${{ inputs.file-path }}
