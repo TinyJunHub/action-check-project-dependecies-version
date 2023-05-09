@@ -15,6 +15,9 @@ This action checks your project's snapshot dependencies.
     # Project build type like service-maven, service-gradle and android-gradle.
     # Default: 'service-maven'
     project-type: ''
+    # The name of main subproject which you want to check like `app` in Android
+    # Default: ''
+    main-subproject-name: ''
 ```
 
 # Scenarios
@@ -42,4 +45,5 @@ This action checks your project's snapshot dependencies.
     uses: TinyJunHub/action-check-project-dependencies-version@v1
     with:
       project-type: 'android-gradle'
+      main-subproject-name: 'app'
 ```
